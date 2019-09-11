@@ -71,6 +71,8 @@ const ProjectTokenGenerator = {
       function(cb) {
         const token = ProjectTokenGenerator.readOnlyToken()
         logger.log({ token }, 'Generated read-only token')
+        // NOTE: Better to have a flag to ignore v1 API if doesn't exist
+        return cb(null, token)
         return V1Api.request(
           {
             url: `/api/v1/sharelatex/docs/read_token/${token}/exists`,
