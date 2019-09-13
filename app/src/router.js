@@ -52,6 +52,7 @@ const LinkedFilesRouter = require('./Features/LinkedFiles/LinkedFilesRouter')
 const TemplatesRouter = require('./Features/Templates/TemplatesRouter')
 const InstitutionsController = require('./Features/Institutions/InstitutionsController')
 const UserMembershipRouter = require('./Features/UserMembership/UserMembershipRouter')
+const TrackChangesController = require('./Features/TrackChanges/TrackChangesController')
 
 const logger = require('logger-sharelatex')
 const _ = require('underscore')
@@ -494,6 +495,26 @@ function initialize(webRouter, privateApiRouter, publicApiRouter) {
     AuthorizationMiddleware.ensureUserCanWriteProjectContent,
     HistoryController.selectHistoryApi,
     HistoryController.proxyToHistoryApi
+  )
+  webRouter.post(
+    '/project/:Project_id/track_changes',
+    AuthorizationMiddleware.ensureUserCanWriteProjectContent,
+    TrackChangesController.toggleTrackChanges
+  )
+  webRouter.post(
+    '/project/:Project_id/:doc_id/changes/:change_id/accept',
+    AuthorizationMiddleware.ensureUserCanWriteProjectContent,
+    TrackChangesController.acceptChange
+  )
+  webRouter.post(
+    '/project/:Project_id/ranges',
+    AuthorizationMiddleware.ensureUserCanReadProjectContent,
+    TrackChangesController.getAllRanges
+  )
+  webRouter.post(
+    '/project/:Project_id/changes/users',
+    AuthorizationMiddleware.ensureUserCanReadProjectContent,
+    TrackChangesController.getAllChangesUsers
   )
   webRouter.post(
     '/project/:project_id/doc/:doc_id/restore',
