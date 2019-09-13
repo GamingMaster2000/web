@@ -990,7 +990,7 @@ define([
         }
       }
       data._csrf = window.csrfToken
-      return $http.post(`/project/${$scope.project_id}/track_changes`, data)
+      return $http.post(`/project/${$scope.project_id}/settings/admin`, data)
     }
 
     const applyTrackChangesStateToClient = function(state) {
