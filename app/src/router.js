@@ -508,12 +508,12 @@ function initialize(webRouter, privateApiRouter, publicApiRouter) {
   )
   webRouter.post(
     '/project/:Project_id/ranges',
-    AuthorizationMiddleware.ensureUserCanReadProjectContent,
+    AuthorizationMiddleware.ensureUserCanReadProject,
     TrackChangesController.getAllRanges
   )
   webRouter.post(
     '/project/:Project_id/changes/users',
-    AuthorizationMiddleware.ensureUserCanReadProjectContent,
+    AuthorizationMiddleware.ensureUserCanReadProject,
     TrackChangesController.getAllChangesUsers
   )
   webRouter.post(
