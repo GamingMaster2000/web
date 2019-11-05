@@ -45,7 +45,7 @@ module.exports = (TrackChangesController = {
 		const {project_id, doc_id} = req.params;
 		const {change_ids} = req.body.change_ids;
 		logger.log({project_id, doc_id, change_ids}, "request to accept change");
-		return DocumentUpdaterHandler.acceptChange(project_id, doc_id, change_ids, function(error) {
+		return DocumentUpdaterHandler.acceptChanges(project_id, doc_id, change_ids, function(error) {
 			if (error != null) { return next(error); }
 			EditorRealTimeController.emitToRoom(project_id, "accept-change", doc_id, change_ids, function(err){});
 			return res.send(204);
