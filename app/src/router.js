@@ -502,7 +502,7 @@ function initialize(webRouter, privateApiRouter, publicApiRouter) {
     TrackChangesController.toggleTrackChanges
   )
   webRouter.post(
-    '/project/:Project_id/:doc_id/changes/:change_id/accept',
+    '/project/:Project_id/:doc_id/changes/accept',
     AuthorizationMiddleware.ensureUserCanWriteProjectContent,
     TrackChangesController.acceptChange
   )
